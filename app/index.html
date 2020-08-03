@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+
+    <title>Hello Groover</title>
+    <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
+    <meta http-equiv="Content-Security-Policy" />
+    <style>
+      @font-face {
+        font-family: 'ocramedium';
+        src: url('./assets/ocr-a.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+      }
+      body {
+        font-family: ocramedium, ocraextended, monospace;
+      }
+      pre {
+        font-family: ocramedium, ocraextended, monospace;
+        color: green;
+      }
+      #videoBG {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+      }
+
+      /* Add some content at the bottom of the video/page */
+      .content {
+        position: fixed;
+        bottom: 0;
+        margin-left: -10px;
+        background: rgba(0, 0, 0, 0.5);
+        color: #f1f1f1;
+        width: 100%;
+        padding: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <video muted loop id="videoBG">
+      <source src="./jungle.m4v" type="video/mp4" />
+    </video>
+    <div class="content" style="width: 100%; overflow: hidden; display: table;">
+      <div style="display: table-row;">
+        <div style="dispaly: table-cell;">
+          <h1 id="title">AVGrooveBox</h1>
+          <ul>
+            <li id="kick"></li>
+            <li id="snare"></li>
+          </ul>
+
+          <p>
+            We are using node
+            <script type="text/javascript">
+              document.write(process.versions.node)
+            </script>
+            , Chrome
+            <script type="text/javascript">
+              document.write(process.versions.chrome)
+            </script>
+            , and Electron
+            <script type="text/javascript">
+              document.write(process.versions.electron)
+            </script>
+            .
+          </p>
+
+          <div class="content-blk">
+            Helo..
+            <button id="btn">
+              Clear
+            </button>
+
+            <div id="message"></div>
+          </div>
+        </div>
+        <div style="display: table-cell; width: 80%;">
+          <pre
+            id="logger"
+            style="height: 20em; overflow: hidden; padding-left: 1em;"
+          ></pre>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      const domStuff = {
+        video: document.getElementById('videoBG'),
+        logger: document.getElementById('logger'),
+      }
+      /*
+      require('./midi').start(
+        document.getElementById('kick'),
+        document.getElementById('snare'),
+        domStuff
+      )
+      // include the ipc module to communicate with main process.
+      const ipcRenderer = require('electron').ipcRenderer
+
+      const btn = document.getElementById('btn')
+      btn.addEventListener('click', function () {
+        console.log('ping sent from web-page')
+        domStuff.logger.innerHTML = 'init'
+        const arg = 'ping'
+        //send the info to main process . we can pass any arguments as second param.
+        ipcRenderer.send('pingMsg', arg) // ipcRender.send will pass the information to main process
+      })
+
+      ipcRenderer.on('pongMsg', (event, arg) => {
+        console.log(arg + 'revieved by web page') // prints "pong"
+      })
+      */
+    </script>
+  </body>
+</html>

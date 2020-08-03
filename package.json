@@ -1,0 +1,36 @@
+{
+  "name": "av_groovebox_prototype_02",
+  "version": "0.1.0",
+  "description": "Another prototype tool for creating audio/visual output, by reacting to audio and midi inputs.",
+  "main": "./app/main.js",
+  "scripts": {
+    "start": "electron .",
+    "watch": "git ls-files | entr -c -r -s 'electron .'",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "eslint ./app/ && prettier --write ./app/"
+  },
+  "dependencies": {
+    "electron": "^9.0.5"
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^6.11.0",
+    "prettier": "^2.0.5",
+    "standard": "^14.3.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hughes-industries/av_groovebox_prototype_02.git"
+  },
+  "keywords": [
+    "audio",
+    "video",
+    "midi",
+    "web"
+  ],
+  "author": "rudenoise",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/hughes-industries/av_groovebox_prototype_02/issues"
+  },
+  "homepage": "https://github.com/hughes-industries/av_groovebox_prototype_02#readme"
+}
