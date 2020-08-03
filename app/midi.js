@@ -14,14 +14,9 @@ async function start(kick, snare, domStuff) {
     domStuff.logger.innerHTML = [msg].concat(existingLogs).join('\n')
   }
 
-  function updateDomC() {
+  function updateDomC(imgNo) {
     const src = domStuff.domC.src
-    let imgNo =  Number(src.slice(-6, -4))
-    if (imgNo === 6) {
-      imgNo = 1
-    } else {
-      imgNo += 1
-    }
+    log('0' + imgNo)
     domStuff.domC.src = [src.slice(0, -6), '0', imgNo, '.png'].join('')
   }
 
@@ -30,6 +25,7 @@ async function start(kick, snare, domStuff) {
   function toggleVideoFilter() {
     filter = filter ? 0 : 1
     domStuff.video.style = `filter: grayscale(${filter});`
+    domStuff.video.currentTime = 0
   }
 
   ;[...inputs].forEach((i) => {
@@ -46,44 +42,29 @@ async function start(kick, snare, domStuff) {
         if (m.data[2] === 0) {
           log('<span style="color: red">STOP</span>')
           domStuff.video.pause()
+          updateDomC(1)
         }
       }
       if (m.data[1] === 94 && m.data[2] === 127) {
         log('<span style="color: lightgreen">PLAY</span>')
         domStuff.video.play()
       }
-      if (m.data[1] === 36) {
-        log(i.name + ' kick ' + m.data.join('-'))
-        if (m.data[0] !== 128 && !kickOn) {
-          msg =
-            'KICK - <span style="color: white">' + m.data.join('-') + '</span>'
-          kick.innerHTML = log(msg)
-          kickOn = true
-          toggleVideoFilter()
-          if (domStuff.video.paused) {
-            domStuff.video.play()
-          }
-          //video.pause()
-          domStuff.video.currentTime = 0
-          //video.load()
-          setTimeout(() => {
-            msg = 'KICK - OFF'
-            kick.innerHTML = msg
-            log(msg)
-            kickOn = false
-          }, 150)
-        }
+      if (m.data[1] === 60) {
+        updateDomC(1)
+        toggleVideoFilter()
       }
-      if (m.data[1] === 38) {
-        log(i.name + ' snare ' + m.data.join('-'))
-        if (m.data[0] !== 128 && !snareOn) {
-          snare.innerHTML = 'SNARE - ' + m.data.join('-')
-          snareOn = true
-          setTimeout(() => {
-            snare.innerHTML = 'SNARE - OFF'
-            snareOn = false
-          }, 150)
-        }
+      if (m.data[1] === 65) {
+        updateDomC(3)
+        toggleVideoFilter()
+      }
+      if (m.data[1] === 71) {
+        updateDomC(2)
+      }
+      if (m.data[1] === 70) {
+        updateDomC(4)
+      }
+      if (m.data[1] === 68) {
+        updateDomC(6)
       }
     }
   })
