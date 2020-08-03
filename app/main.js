@@ -14,7 +14,7 @@ function createWindow() {
       nodeIntegration: true,
       backgroundThrottling: false,
     },
-    icon: './app/sheep.png',
+    //icon: './app/sheep.png',
   })
 
   console.log('app started')
