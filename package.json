@@ -10,7 +10,7 @@
     "format": "eslint ./app/ && prettier --write ./app/"
   },
   "dependencies": {
-    "electron": "^9.0.5"
+    "electron": "^9.3.0"
   },
   "devDependencies": {
     "eslint-config-prettier": "^6.11.0",
