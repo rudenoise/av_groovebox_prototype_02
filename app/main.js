@@ -1,5 +1,6 @@
 'use strict'
 
+const path = require('path')
 const { app, BrowserWindow, ipcMain } = require('electron')
 
 function createWindow () {
@@ -7,18 +8,18 @@ function createWindow () {
   app.win = new BrowserWindow({
     width: 800,
     height: 800,
+    backgroundThrottling: false,
     webPreferences: {
       zoomFactor: 1.0,
-      nodeIntegration: true,
-      backgroundThrottling: false
+      contextIsolation: true,
+      preload: path.join(__dirname, 'preload.js')
     }
-    // icon: './app/sheep.png',
   })
 
   console.log('app started')
 
   // and load the index.html of the app.
-  app.win.loadFile('./app/index.html')
+  app.win.loadFile(path.join(__dirname, 'index.html'))
   console.log('index loaded')
 
   app.win.on('closed', () => {

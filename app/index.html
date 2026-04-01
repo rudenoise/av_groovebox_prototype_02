@@ -66,26 +66,24 @@
         </div>
       </div>
     </div>
+    <script src="./midi.js"></script>
     <script type="text/javascript">
       const domStuff = {
         video: document.getElementById('videoBG'),
         logger: document.getElementById('logger'),
         domC: document.getElementById('domC')
       }
-      require('./midi').start(domStuff)
-      // include the ipc module to communicate with main process.
-      const ipcRenderer = require('electron').ipcRenderer
+      start(domStuff)
 
       const btn = document.getElementById('btn')
       btn.addEventListener('click', function () {
         console.log('ping sent from web-page')
         domStuff.logger.innerHTML = 'init'
         const arg = 'ping'
-        //send the info to main process . we can pass any arguments as second param.
-        ipcRenderer.send('pingMsg', arg) // ipcRender.send will pass the information to main process
+        window.electronAPI.sendPing(arg)
       })
 
-      ipcRenderer.on('pongMsg', (event, arg) => {
+      window.electronAPI.onPong((arg) => {
         console.log(arg + 'revieved by web page') // prints "pong"
       })
     </script>

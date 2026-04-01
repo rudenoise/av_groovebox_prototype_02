@@ -17,3 +17,20 @@ Updated all four dependencies to latest compatible versions. Electron stayed on 
 
 ### What's next
 Upgrade Electron from v18 to latest. This requires introducing a preload script and contextBridge to replace the `require()` calls in the renderer.
+
+## 2026-04-01 — Electron 18 → 41 upgrade
+
+**Working on**: Replacing deprecated nodeIntegration with contextBridge/preload for the Electron MIDI groovebox.
+**State**: done (uncommitted, on `upgrade-electron` branch, needs manual testing)
+
+### What happened
+Upgraded Electron from 18.3.15 to 41.1.1. Created a preload script that exposes channel-specific IPC wrappers via contextBridge (not the raw ipcRenderer). Converted midi.js from CommonJS module to plain script loaded via `<script>` tag — it only uses Web APIs so no bridging needed. Refactored index.html to use `window.electronAPI` instead of `require('electron')`. Moved `backgroundThrottling` out of webPreferences (deprecated there in modern Electron). npm audit now shows 0 vulnerabilities.
+
+### What I learned
+- midi.js needed zero Node APIs — making it a plain `<script>` tag was simpler than any module system
+- Exposing channel-specific wrappers (sendPing, onPong) is better than raw ipcRenderer — prevents the renderer from inventing channels or accessing the ipcRenderer object
+- Prettier reformats `eslint-disable-line` inline comments to their own line, breaking them. `eslint-disable-next-line` on the preceding line survives prettier
+- `backgroundThrottling` moved from webPreferences to top-level BrowserWindow options between Electron 18 and 41
+
+### What's next
+Manual testing: `npm start`, verify window/video/images render, test ping/pong IPC via the Clear button, connect a MIDI device if available. Then commit and merge.

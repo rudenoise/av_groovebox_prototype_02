@@ -10,7 +10,7 @@
     "format": "prettier --write ./app/ && standard --fix ./app/"
   },
   "dependencies": {
-    "electron": "^18.3.15"
+    "electron": "^41.1.1"
   },
   "devDependencies": {
     "prettier": "^3.8.1",

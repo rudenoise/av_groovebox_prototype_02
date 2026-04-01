@@ -1,5 +1,6 @@
 'use strict'
 
+/* eslint-disable-next-line no-unused-vars */
 async function start (domStuff) {
   const access = await navigator.requestMIDIAccess()
   // Get lists of available MIDI controllers
@@ -69,5 +70,3 @@ async function start (domStuff) {
     log([e.port.name, e.port.manufacturer, e.port.state])
   }
 }
-
-module.exports.start = start
