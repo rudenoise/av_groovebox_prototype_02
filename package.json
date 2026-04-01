@@ -7,15 +7,14 @@
     "start": "electron .",
     "watch": "git ls-files | entr -c -r -s 'electron .'",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "eslint ./app/ && prettier --write ./app/"
+    "format": "prettier --write ./app/ && standard --fix ./app/"
   },
   "dependencies": {
-    "electron": "^18.3.7"
+    "electron": "^18.3.15"
   },
   "devDependencies": {
-    "eslint-config-prettier": "^6.11.0",
-    "prettier": "^2.0.5",
-    "standard": "^14.3.4"
+    "prettier": "^3.8.1",
+    "standard": "^17.1.2"
   },
   "repository": {
     "type": "git",

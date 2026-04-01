@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '\\n--- wrap-up reminder ---\\nConsider running /rude_claude:wrap-up <title> to reflect, simplify, and log this work.' >&2"
+          }
+        ]
+      }
+    ]
+  }
+}

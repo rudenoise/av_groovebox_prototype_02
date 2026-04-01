@@ -1,12 +1,10 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html>
   <head>
     <meta charset="UTF-8" />
 
     <title>Hello Groover</title>
-    <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
-    <meta http-equiv="Content-Security-Policy" />
     <style>
       body {
         font-family: ocraextended, monospace;
@@ -49,29 +47,21 @@
       <source src="./jungle.m4v" type="video/mp4" />
     </video>
     <img id="domC" src="./img/01.png" width="100%" />
-    <div class="content" style="width: 100%; overflow: hidden; display: table;">
-      <div style="display: table-row;">
-        <div style="dispaly: table-cell;">
+    <div class="content" style="width: 100%; overflow: hidden; display: table">
+      <div style="display: table-row">
+        <div style="dispaly: table-cell">
           <h1 id="title">AVGrooveBox</h1>
-          <ul>
-            <li id="kick"></li>
-            <li id="snare"></li>
-          </ul>
-
-
           <div class="content-blk">
             Helo..
-            <button id="btn">
-              Clear
-            </button>
+            <button id="btn">Clear</button>
 
             <div id="message"></div>
           </div>
         </div>
-        <div style="display: table-cell; width: 80%;">
+        <div style="display: table-cell; width: 80%">
           <pre
             id="logger"
-            style="height: 3em; overflow: hidden; padding-left: 1em;"
+            style="height: 3em; overflow: hidden; padding-left: 1em"
           ></pre>
         </div>
       </div>
@@ -80,13 +70,9 @@
       const domStuff = {
         video: document.getElementById('videoBG'),
         logger: document.getElementById('logger'),
-        domC: document.getElementById('domC'),
+        domC: document.getElementById('domC')
       }
-      require('./midi').start(
-        document.getElementById('kick'),
-        document.getElementById('snare'),
-        domStuff
-      )
+      require('./midi').start(domStuff)
       // include the ipc module to communicate with main process.
       const ipcRenderer = require('electron').ipcRenderer
 

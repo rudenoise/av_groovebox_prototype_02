@@ -2,9 +2,7 @@
 
 const { app, BrowserWindow, ipcMain } = require('electron')
 
-let isShown = true
-
-function createWindow() {
+function createWindow () {
   // Create the browser app.window.
   app.win = new BrowserWindow({
     width: 800,
@@ -12,9 +10,9 @@ function createWindow() {
     webPreferences: {
       zoomFactor: 1.0,
       nodeIntegration: true,
-      backgroundThrottling: false,
-    },
-    //icon: './app/sheep.png',
+      backgroundThrottling: false
+    }
+    // icon: './app/sheep.png',
   })
 
   console.log('app started')
@@ -26,15 +24,6 @@ function createWindow() {
   app.win.on('closed', () => {
     app.quit()
   })
-
-  app.win.on('hide', function () {
-    isShown = false
-  })
-
-  app.win.on('show', function () {
-    isShown = true
-  })
-
 
   // Open the DevTools.
   app.win.webContents.openDevTools()
@@ -49,7 +38,7 @@ ipcMain.on('pingMsg', function (event, arg) {
 
 app.whenReady().then(createWindow)
 
-app.on('app.window-all-closed', () => {
+app.on('window-all-closed', () => {
   app.quit()
 })
 

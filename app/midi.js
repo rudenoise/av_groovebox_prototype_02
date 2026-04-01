@@ -1,20 +1,17 @@
 'use strict'
 
-async function start(kick, snare, domStuff) {
+async function start (domStuff) {
   const access = await navigator.requestMIDIAccess()
   // Get lists of available MIDI controllers
   const inputs = access.inputs.values()
-  const outputs = access.outputs.values()
-  let kickOn = false
-  let snareOn = false
-  function log(msg) {
+  function log (msg) {
     console.log('logger: ' + msg)
     const existingLogs = domStuff.logger.innerHTML.split('\n')
     console.log('logger: ', existingLogs)
     domStuff.logger.innerHTML = [msg].concat(existingLogs).join('\n')
   }
 
-  function updateDomC(imgNo) {
+  function updateDomC (imgNo) {
     const src = domStuff.domC.src
     log('0' + imgNo)
     domStuff.domC.src = [src.slice(0, -6), '0', imgNo, '.png'].join('')
@@ -22,7 +19,7 @@ async function start(kick, snare, domStuff) {
 
   let filter = 0
 
-  function toggleVideoFilter() {
+  function toggleVideoFilter () {
     filter = filter ? 0 : 1
     domStuff.video.style = `filter: grayscale(${filter});`
     domStuff.video.currentTime = 0
@@ -31,7 +28,6 @@ async function start(kick, snare, domStuff) {
   ;[...inputs].forEach((i) => {
     log('input ' + i.name)
     i.onmidimessage = (m) => {
-      let msg = ''
       log(
         i.name +
           ' - <span style="color: white">' +
@@ -68,10 +64,6 @@ async function start(kick, snare, domStuff) {
       }
     }
   })
-  ;[...outputs].forEach((o) => {
-    log('output ' + o.name)
-  })
-
   access.onstatechange = function (e) {
     // Print information about the (dis)connected MIDI controller
     log([e.port.name, e.port.manufacturer, e.port.state])
